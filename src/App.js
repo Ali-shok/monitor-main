@@ -9,8 +9,9 @@ import { Store } from './Store';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import HomeScreen from './Screens/HomeScreen';
-import ThemeScreen from './Screens/ThemeScreen';
-import EvaluationsScreen from './Screens/EvaluationsScreen';
+import EvaluationDocumentScreen from './Screens/EvaluationDocumentScreen';
+import EvaluationInformationScreen from './Screens/EvaluationInformationScreen';
+import EvaluationAnalysisScreen from './Screens/EvaluationAnalysisScreen';
 
 function App() {
   const { state, dispatch: ctxdispatch } = useContext(Store);
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="d-flex flex-column site-container">
+      <div className="d-flex flex-column">
         <header>
           <Navbar bg="dark" variant="dark">
             <Container>
@@ -54,21 +55,23 @@ function App() {
             </Container>
           </Navbar>
         </header>
-        <br />
         <main>
           <Routes>
             <Route path="/login" element={<LoginScreen />} />
-            <Route path="/" element={<Navigate to="/theme/:id" />} />
             <Route path="/theme/:id" element={<HomeScreen />} />
-
+            <Route path="/" element={<Navigate to="/theme/0" />} />
             <Route
-              path="/evaluation/:themeId"
-              element={<EvaluationsScreen />}
+              path="/evaluationAnalysis/:id"
+              element={<EvaluationAnalysisScreen />}
             />
-
-            {/* <Route path="/evaluation/:themeId" element={<EvaluationsScreen />} /> */}
-
-            {/* <Route path="/theme/:id" element={<ThemeScreen />} /> */}
+            <Route
+              path="/evaluationDocument/:id"
+              element={<EvaluationDocumentScreen />}
+            />
+            <Route
+              path="/evaluationInformation/:id"
+              element={<EvaluationInformationScreen />}
+            />
           </Routes>
         </main>
       </div>

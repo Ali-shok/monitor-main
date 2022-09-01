@@ -42,3 +42,77 @@ code {
   align-items: center;
   justify-content: center;
 }
+.centerl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-style {
+  color: none;
+  text-decoration: none;
+}
+
+/*  BreadCrapmp Style     */
+.breadCramLocation {
+  width: 100%;
+  margin: auto;
+}
+
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+}
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+ul.breadcrumb li + li:before {
+  padding: 8px;
+  color: white;
+  content: '  ';
+}
+
+ul.breadcrumb li {
+  color: White;
+  text-decoration: none;
+}
+
+/*  BreadCrapmp Style     */
+
+.color-button {
+  background-color: #2e2e2e;
+  max-width: 18rem;
+}
+
+.a {
+  max-height: 75vh;
+}
+
+/*  AnalyisTheme Style     */
+
+div.gallery {
+  cursor: pointer;
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+div.gallery img {
+  width: 100%;
+  height: 75%;
+}
+div.desc {
+  padding: 5px;
+  text-align: right;
+}
+
+/*  AnalyisTheme Style     */
+
+.padding {
+  padding: 8px 0px;
+}

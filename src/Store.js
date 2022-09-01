@@ -1,9 +1,10 @@
 import { createContext, useReducer } from 'react';
-import React from 'react'
+import React from 'react';
 
 export const Store = createContext();
 
 const intialState = {
+  crumbs: ['Home'],
   userInfo: localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null,

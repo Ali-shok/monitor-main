@@ -1,28 +1,47 @@
-import React from "react";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Store } from '../Store';
 
 function Theme(props) {
+  const { state, dispatch } = useContext(Store);
+  const { crumbs } = state;
   const { theme, route } = props;
-  const fontColor = theme.Schriftfarbe;
+  const navigate = useNavigate();
+  function handlerClick() {
+    if (crumbs.length === 1) {
+      crumbs.push(theme.Name);
+      localStorage.setItem('crumbs', crumbs);
+      navigate(route);
+    } else if (crumbs.length === 2) {
+      crumbs.push(theme.Name);
+      localStorage.setItem('crumbs', crumbs);
+      navigate(`/evaluationAnalysis/${theme.ID}`);
+    }
+  }
+
   return (
-    <Card
+    <div
+      onClick={handlerClick}
+      className="card"
       style={{
+        cursor: 'auto',
+        cursor: 'pointer',
+        width: '18rem',
         backgroundColor: theme.Hintergrundfarbe,
-        color: fontColor,
+        fontColor: theme.Schriftfarbe,
       }}
     >
-      <Card.Img
-        variant="top"
-        src={theme.Hintergrundbildpfad ? theme.Hintergrundbildpfad : null}
-      />
-      <Card.Body>
-        <Link className="text" to={route}>
-          <Card.Title>{theme.Name}</Card.Title>
-        </Link>
-        <Card.Text>d make up the bulk of the card's content.</Card.Text>
-      </Card.Body>
-    </Card>
+      {props.theme.Hintergrundbildpfad ? (
+        <img
+          className="card-img-top"
+          src={`//www.geoware-gmbh.de/ViewerBackend/api/Img/${props.theme.Hintergrundbildpfad}`}
+          alt="Card image cap"
+        />
+      ) : null}
+      <div className="card-body">
+        <h5 className="card-title ">{theme.Name}</h5>
+      </div>
+    </div>
   );
 }
 

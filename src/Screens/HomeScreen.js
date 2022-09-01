@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import { Store } from '../Store';
 import { useNavigate, useParams } from 'react-router-dom';
 import Theme from '../Components/Theme';
+import Breadcrumb from '../Components/BreadCrumb';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,7 +31,7 @@ function HomeScreen() {
     loading: true,
   });
   const { state } = useContext(Store);
-  const { userInfo } = state;
+  const { userInfo, crumbs } = state;
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
@@ -45,7 +46,7 @@ function HomeScreen() {
             `https://www.geoware-gmbh.de/ViewerBackend/api/GetThemen/${id}`,
             {
               headers: {
-                jwtToken: `${token}`,
+                Authorization: 'Bearer ' + token,
               },
             }
           );
@@ -76,23 +77,34 @@ function HomeScreen() {
       <MessageBox variant="warning">{error}</MessageBox>
     </Container>
   ) : (
-    <Container className="mt-3">
-      <div>
-        <Helmet>
-          <title>Home Page</title>
-        </Helmet>
-        <h1 className="mb-3 text">Main Theme</h1>
-        <div className="themes mt-3">
+    <div>
+      <Helmet>
+        <title>Home Page</title>
+      </Helmet>
+      {crumbs.length === 1 ? (
+        <Container>
+          <h1 className="mb-3 text">Main Theme</h1>
+        </Container>
+      ) : null}
+      {crumbs.length === 2 ? (
+        <Container fluid>
+          <Row>
+            <Breadcrumb crumbs={crumbs} />
+          </Row>
+        </Container>
+      ) : null}
+      <Container>
+        <div className="mt-3">
           <Row>
             {themes.map((theme) => (
-              <Col key={theme.ID} sm={6} md={4} lg={4} className="mb-3">
+              <Col key={theme.ID} sm={6} lg={4} className="mb-3 themes">
                 <Theme theme={theme} route={`/theme/${theme.ThemenID}`} />
               </Col>
             ))}
           </Row>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
 

@@ -84,15 +84,17 @@ function LoginScreen() {
                   }}
                 />
               </Form.Group>
-              <div className="mb-3 text right-item">
-                {isClickedLogInButton ? (
+              {isClickedLogInButton ? (
+                <div className="centerl">
                   <LoadingBox />
-                ) : (
+                </div>
+              ) : (
+                <div className="mb-3 text right-item">
                   <Button variant="outline-warning text" type="submit">
                     login
                   </Button>
-                )}
-              </div>
+                </div>
+              )}
             </Form>
           </Col>
           <Col md={3}></Col>
